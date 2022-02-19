@@ -43,7 +43,10 @@ public class WordDuoList {
         allDuos = new ArrayList<>();
 
         for(int i = 1, counter = 0; counter < words.length - 2; i++){
-            i = (i == words.length) ? (i = 1 + ++counter) : i;
+            if (i == words.length) {
+                i = 1 + ++counter;
+            }
+
             allDuos.add(new WordDuo(words[counter], words[i]));
         }
 
@@ -131,3 +134,106 @@ public class WordDuoList {
         System.out.println(wdl3);
     }
 }
+
+/* Output
+(to, be)
+(to, or)
+(to, not)
+(to, to)
+(to, be)
+(be, or)
+(be, not)
+(be, to)
+(be, be)
+(or, not)
+(or, to)
+(or, be)
+(not, to)
+(not, be)
+(to, be)
+
+2
+(to, to)
+(be, be)
+(to, be)
+(to, or)
+(to, to)
+(to, be)
+(be, or)
+(be, not)
+(be, be)
+(or, not)
+(or, to)
+(or, be)
+(not, to)
+(not, be)
+(to, be)
+
+(one, fish)
+(one, two)
+(one, fish)
+(one, red)
+(one, fish)
+(one, blue)
+(one, fish)
+(fish, two)
+(fish, fish)
+(fish, red)
+(fish, fish)
+(fish, blue)
+(fish, fish)
+(two, fish)
+(two, red)
+(two, fish)
+(two, blue)
+(two, fish)
+(fish, red)
+(fish, fish)
+(fish, blue)
+(fish, fish)
+(red, fish)
+(red, blue)
+(red, fish)
+(fish, blue)
+(fish, fish)
+(blue, fish)
+
+6
+(fish, fish)
+(fish, fish)
+(fish, fish)
+(fish, fish)
+(fish, fish)
+(fish, fish)
+(one, fish)
+(one, two)
+(one, fish)
+(one, red)
+(one, fish)
+(one, blue)
+(one, fish)
+(fish, fish)
+(fish, fish)
+(fish, fish)
+(two, fish)
+(two, red)
+(two, fish)
+(two, blue)
+(two, fish)
+(fish, fish)
+(fish, fish)
+(red, fish)
+(red, blue)
+(red, fish)
+(fish, fish)
+(blue, fish)
+
+(call, me)
+(call, ishmael)
+(me, ishmael)
+
+0
+(call, me)
+(call, ishmael)
+(me, ishmael)
+ */

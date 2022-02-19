@@ -45,8 +45,11 @@ public class ScantArray {
      */
     public int getValueAt(int row, int col){
         /* part a */
-
-
+        for (ScantArrayEntry entry : entries) {
+            if (entry.getRow() == row)
+                if (entry.getColumn() == col)
+                    return entry.getValue();
+        }
 
         return 0;    // replace this
     }
@@ -60,7 +63,15 @@ public class ScantArray {
     public void removeColumn(int col){
         /* part b */
 
-
+        for(int i = entries.size() -1; i >= 0; i--) {
+            ScantArrayEntry currentEntry = entries.get(i);
+            entries.remove(i);
+            if(currentEntry.getColumn() > col)
+                entries.add(new ScantArrayEntry(currentEntry.getRow(), currentEntry.getColumn() - 1, currentEntry.getValue()));
+            if(currentEntry.getColumn() < col)
+                entries.add(new ScantArrayEntry(currentEntry.getRow(), currentEntry.getColumn(), currentEntry.getValue()));
+        }
+        numColumns--;
 
 
     }
@@ -77,11 +88,15 @@ public class ScantArray {
     public String toString(){
         /* part c */
         String s = "";
-
-
-
+        for (int r = 0; r < numRows; r++) {
+            for (int c = 0; c < numColumns; c++) {
+                s += getValueAt(r, c) + " ";
+            }
+            s += "\n";
+        }
 
         return s;
+
     }
 
     public static void main(String[] args){
@@ -102,6 +117,56 @@ public class ScantArray {
         sa1.removeColumn(1);
         System.out.println(sa1);
 
-        /******* please add one more test of your own *******/
+        ScantArray sa2 = new ScantArray(4,4);
+        sa2.addEntry(0,0,1);
+        sa2.addEntry(1,1,1);
+        sa2.addEntry(2,2,1);
+        sa2.addEntry(3,3,1);
+        sa2.addEntry(4,4,1);
+
+
+
+        System.out.println(sa2.getValueAt(2,0));
+        System.out.println(sa2.getValueAt(3,1));
+        System.out.println(sa2.getValueAt(2,2));
+        System.out.println("rows " + sa2.getNumRows());
+        System.out.println("columns " + sa2.getNumColumns());
+
+        System.out.println(sa2);
+
+        sa2.removeColumn(1);
+        System.out.println(sa2);
     }
 }
+
+/* Output
+1
+-9
+0
+rows 4
+columns 5
+0 0 0 0 0
+0 5 0 0 4
+1 0 0 0 0
+0 -9 0 0 0
+
+0 0 0 0
+0 0 0 4
+1 0 0 0
+0 0 0 0
+
+0
+0
+1
+rows 4
+columns 4
+1 0 0 0
+0 1 0 0
+0 0 1 0
+0 0 0 1
+
+1 0 0
+0 0 0
+0 1 0
+0 0 1
+ */
